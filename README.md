@@ -1,2 +1,108 @@
-# BrainHeartModels
-Understand the models to capture brain heart interactions
+# The goal of the repo is to understand the various heart brain interactions models to its bones
+
+
+
+# Paper 1 - Robust and time resolved estimation of cardiac sympathetic and parasympathetic indices by Diego Candia-Rivera et al 2024
+
+
+
+There are four parts
+
+### What is being modelled?
+
+`How is the autonomic control spitting out beat to beat timing control`
+
+Conventionally, we have sympathetic activity shortening Inter Beat Intervals (IBI) and parasympathetic activity broadening IBIs. Here, the model has three knobs - a baseline timing (mean cardiac cycle), fast variability and slow variability.
+
+
+
+The Poincare plot (current beat vs next beat as the 2D space) is conceptualised as a delay-embedded state space. Authors treat this geometric representation as a local state representation of the cardiac control. This has multiple advantages: removes the need for interpolation (which is typically done in standard frequency domain analysis of RR intervals), can encode short term vs long term dynamics in a visual way and separates mean timing from variability.
+
+
+
+Following the three knobs we have these descriptors
+
+Cardiac Cycle Duration (CCD) - the distance of the ellipse center to the origin. This would be same as mean RR interval. \*\*This is reflective of sympathetic tone\*\*
+
+
+
+SD1 - Short term variability (minor axis) capturing beat to beat jitter, strongly controlled by vagal tone. In math terms, this is small eigen value of the covariance matrix
+
+
+
+SD2 - Long term variability (major axis), influenced by sympathetic drive. In math world, large eigen value of covariance matrix
+
+
+
+> How do we go from static to dynamic?
+
+Typically, we get one geometric Poincare plot from one RR time series. We go with the good old sliding windows (15 seconds as default) to convert static to time varying dynamics
+
+
+
+Now, we have all the ingredients for the model.
+
+
+
+1. Re-centering to the global (CCD, SD1 and SD2)
+
+This ensures that the index reflects changes and not absolute values. A within subject normalisation as well
+
+2. The physiology based prior of the model
+
+
+
+> Sympathetic and parasympathetic activity are not pure HRV features. They are conceptualised as weighted interactions of baseline timing CCD, SD1 and SD2
+
+
+
+CPI is \*\*Insert formula\*\*
+
+kp is the weighting coefficient
+
+
+
+CSI 
+
+ks is the weight and CCD is flipped
+
+
+
+This symmetry is central to the model
+
+
+
+Where do Kp=1 and Ks=10 come from? These are not free parameters in real time. They are chosen empirically on a subset of data. 
+
+
+
+### How is the signal geometry turned into time resolved variables?
+
+
+
+### How are these variables morphed to CSI and CPI (the engine of the model)
+
+
+
+### What are some of the assumptions and limitations of the model?
+
+Poincaré plots are sensitive to ectopic beats. We have 4 choices from a methods perspective
+
+Exact, approximate, 95% MCD and robust shrinkage (Ledoit–Wolf) which is the main choice.
+
+The robust shrinkage is default because of methodological strength (it stabilises eigen values, reduces outlier leverage, preserves the Poincare geometry)
+
+
+> What the mode is *NOT*
+
+- This is not a generative model (meaning it can't give us the RR interval time series)
+- Not a state-space autonomic model
+- Operating directly in observable space
+- Optimized for time-resolved tracking
+This is why it is computationally light compared to Laguerre/Kalman models.
+
+> Assumptions
+- Linear superposition of HR and HRV effects
+- Stationarity within sliding windows
+- Poincaré geometry sufficiently separates fast/slow dynamics
+- No explicit respiratory modelling
