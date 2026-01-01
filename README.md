@@ -106,3 +106,21 @@ This is why it is computationally light compared to Laguerre/Kalman models.
 - Stationarity within sliding windows
 - Poincaré geometry sufficiently separates fast/slow dynamics
 - No explicit respiratory modelling
+
+Sympathetic and parasympathetic systems are not independent controllers of the heart. 
+Both branches affect variability. They often co-activate or co-withdraw.
+You can have vagal withdrawal and sympathetic activation, You can have both decreasing (sleep), 
+You can have paradoxical combinations
+
+> CSI and CPI are not orthogonal because autonomic control of the heart is not orthogonal.
+
+The model is measuring shared cardiac phase effects, not branch specific modulation.
+
+- Chronotropy: Affects Heart Rate (the timing/frequency of beats)
+- Inotropy: Affects Contractility (the force of the heartbeat)
+- Dromotropy: Affects Conduction Velocity (how fast electrical impulses travel through the heart)
+
+In some sense, CCD is capturing the SA node firing rate, it is the only term in the model which captures this. Sympathetic ↑ → HR ↑, SD2 ↑ and Parasympathetic ↑ → HR ↓, SD1 ↑
+
+SD1 and SD2 describe how the heart varies. CCD describes where the heart is operating.
+CSI and CPI describe directed movement in this combined space.
