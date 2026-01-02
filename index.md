@@ -5,8 +5,17 @@ title: Home
 
 [Home](/) | [Page 1](/docs/p1) | [Page 2](/docs/p2)
 
-# Welcome to Your Site
+# Understand multiple Brain Heart Models
 
-Your main content goes here. This is the homepage.
+Welcome to the Brain Heart Models documentation.
 
-Add your introduction, overview, or whatever you want visitors to see first.
+This site contains information about brain-heart interaction models and two-way communication systems.
+
+## Navigation
+
+- **[Page 1](/docs/p1)** - Description of what's on page 1
+- **[Page 2](/docs/p2)** - Description of what's on page 2
+
+## Overview
+
+Add your main content here - introduction, overview, or whatever you want visitors to see first on your homepage.
