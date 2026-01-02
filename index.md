@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-[Home](/) | [Page 1](/docs/p1) | [Page 2](/docs/p2)
+[Home]({{ site.baseurl }}/) | [Page 1]({{ site.baseurl }}/docs/p1) | [Page 2]({{ site.baseurl }}/docs/p2)
 
 # Understand multiple Brain Heart Models
 
@@ -13,8 +13,8 @@ This site contains information about brain-heart interaction models and two-way 
 
 ## Navigation
 
-- **[Page 1](/docs/p1)** - Description of what's on page 1
-- **[Page 2](/docs/p2)** - Description of what's on page 2
+- **[Page 1]({{ site.baseurl }}/docs/p1)** - Description of what's on page 1
+- **[Page 2]({{ site.baseurl }}/docs/p2)** - Description of what's on page 2
 
 ## Overview
 
